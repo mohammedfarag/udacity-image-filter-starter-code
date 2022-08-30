@@ -1,5 +1,6 @@
 import fs from "fs";
-import Jimp = require("jimp");
+import Jimp from "jimp";
+import axios from "axios";
 
 // filterImageFromURL
 // helper function to download, filter, and save the filtered image locally
@@ -11,7 +12,13 @@ import Jimp = require("jimp");
 export async function filterImageFromURL(inputURL: string): Promise<string> {
   return new Promise(async (resolve, reject) => {
     try {
-      const photo = await Jimp.read(inputURL);
+      const photo = await axios({
+        method: "get",
+        url: inputURL,
+        responseType: "arraybuffer",
+      }).then(function ({ data: imageBuffer }) {
+        return Jimp.read(imageBuffer);
+      });
       const outpath =
         "/tmp/filtered." + Math.floor(Math.random() * 2000) + ".jpg";
       await photo
@@ -36,4 +43,17 @@ export async function deleteLocalFiles(files: Array<string>) {
   for (let file of files) {
     fs.unlinkSync(file);
   }
+}
+
+// isImgLink
+// helper function to check if url is a valid image address
+// INPUTS
+//    url: image url
+export function isImgLink(url: string) {
+  if (typeof url !== "string") {
+    return false;
+  }
+  return (
+    url.match(/^http[^\?]*.(jpg|jpeg|gif|png|tiff|bmp)(\?(.*))?$/gim) !== null
+  );
 }
