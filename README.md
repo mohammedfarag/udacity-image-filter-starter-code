@@ -23,4 +23,6 @@ The project is split into three parts:
 
 1. The stubbed @TODO1 endpoint in src/server.ts is completed
 2. [Repository URL](https://github.com/mohammedfarag/udacity-image-filter-starter-code)
-3. [EB-Endpoint](https://github.com/mohammedfarag/udacity-image-filter-starter-code)
+3. [EB-Endpoint](http://project2-prod.us-east-1.elasticbeanstalk.com/api/v1/filteredimage?image_url=https://upload.wikimedia.org/wikipedia/commons/b/bd/Golden_tabby_and_white_kitten_n01.jpg)
+4. A screenshot of the elastic beanstalk application dashboard
+   ![alt Screenshot](https://github.com/mohammedfarag/udacity-image-filter-starter-code/blob/main/deployment_screenshots/udacity-image-filter-microservice-prod-3.png?raw=true)
